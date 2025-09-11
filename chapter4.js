@@ -11,10 +11,25 @@ used when building the array. If no step is given, the elements should go up by 
 old behavior. The function call range(1, 10, 2) should return [1, 3, 5, 7, 9]. Make sure this also works with negative
 step values so that range(5, 2, -1) produces [5,4, 3, 2].
  */
-function rangeFunc(start, end){
+function rangeFunc(start, end, step){
     let retArr = [];
-    for (let i = start; i <= end; i= i +1){
-        retArr.push(i)
+    if (step<0){
+        for (let i = end; i >= start; i= i + step){
+            retArr.push(i)
+        }
+    } else {
+        for (let i = start; i <= end; i= i + step){
+            retArr.push(i)
+        }
     }
     return retArr
 }
+function arrSum(arr){
+    let retSum = 0;
+    for (let i of arr){
+        retSum += i;
+    }
+    return retSum;
+}
+
+console.log(rangeFunc(0, 5, -2));
