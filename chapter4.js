@@ -110,6 +110,69 @@ function arrayToList(arr){
     }
 }
 
-console.log(arrayToList([0,1,2]));
+/*
+Deep comparison
+The == operator compares objects by identity, but sometimes you’d prefer to compare the values of their actual
+properties. Write a function deepEqual that takes two values and returns true only if they are the same value or are
+objects with the same properties, where the values of the properties are equal when compared with a recursive call to
+deepEqual.
+To find out whether values should be compared directly (using the === operator for that) or have their
+properties compared, you can use the typeof operator. If it produces "object" for both values, you should do a deep
+comparison. But you have to take one silly exception into account: because of a historical accident, typeof null also
+produces "object".
+The Object.keys function will be useful when you need to go over the properties of objects to compare them.
+ */
+function deepEqual(firstValue, secondValue){
+    if((!firstValue && secondValue)||(firstValue && ! secondValue)){
+        return false;
+    }
+    if(Object.keys(firstValue).toString()!==Object.keys(secondValue).toString()){
+        return false;
+    }
+    else{
+        for(let key of Object.keys(firstValue)){
+            if(typeof(firstValue[key]) === "object"){
+                if(deepEqual(firstValue[key], secondValue[key])){
+                    continue;
+                } else{
+                    return false;
+                }
+            }
+            else if(firstValue[key] !== secondValue[key]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+console.log(deepEqual({
+    a:1,
+    b:2
+},
+    {
+        a:1,
+        b:2,
+    }))
 
 
+console.log(deepEqual(
+    {a:1, b:2, c: {d:3, e:4}},
+{
+        a:1,
+        b:2,
+    }))
+
+console.log(deepEqual(
+    {a:1, b:2, c: {d:3, e:4}},
+    {
+        a:1,
+        b:2, c:{d:3, e:4}
+    }))
+
+console.log(deepEqual(
+    {a:1, b:2, c: {d:3, e:4}},
+    {
+        a:1,
+        b:2, c:null
+    }))
