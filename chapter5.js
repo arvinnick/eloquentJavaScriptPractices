@@ -39,6 +39,6 @@ function loopEverything(array, predicateFunction){
     return every;
 }
 
-let arr = [0, 1, 2, 3];
-const prFunc = x=> x<4;
-console.log(loopEverything(arr, prFunc));
+// let arr = [0, 1, 2, 3];
+// const prFunc = x=> x<4;
+// console.log(loopEverything(arr, prFunc));
