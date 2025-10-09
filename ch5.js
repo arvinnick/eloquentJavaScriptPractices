@@ -8,7 +8,7 @@ to the prototype that computes the length of the vector—that is, the distance 
  */
 
 class Vec{
-    Cobstructor(x, y){
+    constructor(x, y){
         this.x = x;
         this.y = y;
     }
@@ -24,6 +24,48 @@ class Vec{
     }
 }
 
-let vec = new Vec(5,4);
-let veca = new Vec(3,2);
-console.log(vec.minus(veca).length)
+// let vec = new Vec(5,4);
+// let veca = new Vec(3,2);
+// console.log(vec.minus(veca).length)
+
+
+/*
+Groups
+The standard JavaScript environment provides another data structure called Set. Like an instance of Map, a set holds a
+collection of values. Unlike Map, it does not associate other values with those—it just tracks which values are part of
+the set. A value can be part of a set only once—adding it again doesn’t have any effect. Write a class called Group
+(since Set is already taken). Like Set, it has add, delete, and has methods. Its constructor creates an empty group, add
+adds a value to the group (but only if it isn’t already a member), delete removes its argument from the group (if it was
+a member), and has returns a Boolean value indicating whether its argument is a member of the group.
+Use the === operator, or something equivalent such as indexOf, to determine whether two values are the same. Give the
+class a static from method that takes an iterable object as its argument and creates a group that contains all the
+values produced by iterating over it.
+ */
+class Group{
+    constructor(){
+        this.self = [];
+    }
+    add(x){
+        if (!this.has(x)){
+            this.self.push(x);
+        }
+    }
+    delete(x){
+        if (this.has(x)){
+            this.self = this.self.filter(item => item !== x);
+        }
+    }
+    has(x){
+        return !(this.self.indexOf(x) === -1);
+    }
+    static from(iterableObject){
+        let g = new Group();
+        for (let item of iterableObject){
+            g.add(item);
+        }
+        return g;
+    }
+}
+
+let g = Group.from([1,2,3,4,5])
+console.log(g.self)
