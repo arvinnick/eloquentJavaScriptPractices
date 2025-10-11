@@ -65,7 +65,18 @@ class Group{
         }
         return g;
     }
+    [Symbol.iterator](){
+        let idx = -1;
+        let self = this;
+        return{
+                next(){
+                    return (idx <= self.self.length - 1) ? {value:self.self[idx++]} : {done:true};
+                }
+            }
+    }
 }
 
 let g = Group.from([1,2,3,4,5])
-console.log(g.self)
+for (let i of g) {
+    console.log(i)
+}
