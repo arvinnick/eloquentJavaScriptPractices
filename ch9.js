@@ -119,5 +119,5 @@ let text = "'Are you sure this is the right house?' Lila asked as she hesitated 
     "'Afraid?' Lila rolled her eyes. 'I'm curious, that's all. Besides, what's the worst that could happen?'\n" +
     "They pushed the gate open and stepped onto the path. 'Stay close,' Lila told Marco. 'And if anything happens, call John's number right away.'\n"
 
-text = text.replace(/(^'|'(?=\s))/,'"')
+text = text.replace(/(?<!\w)'|'(?!\s)/g,'"') //AI assisted
 console.log(text)
