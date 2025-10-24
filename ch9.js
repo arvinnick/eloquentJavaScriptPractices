@@ -121,3 +121,55 @@ let text = "'Are you sure this is the right house?' Lila asked as she hesitated 
 
 text = text.replace(/(?<!\w)'|'(?!\s)/g,'"') //AI assisted
 console.log(text)
+
+
+/*
+Numbers again
+Write an expression that matches only JavaScript-style numbers. It must support an optional minus or plus sign in front
+of the number, the decimal dot, and exponent notation—5e-3 or 1E10—again with an optional sign in front of the exponent.
+Also note that it is not necessary for there to be digits in front of or after the dot, but the number cannot be a dot
+alone. That is, .5 and 5. are valid JavaScript numbers, but a lone dot isn’t.
+ */
+regexp = /^[-+]?\.?\d+\.?(\d*\.?[eE][-+]?\d+)?\d*$/
+
+
+function testRegexpNum(name, regexp, yes, no) {
+    if (regexp.source === "YOUR_REGEX_HERE") return console.log(`⚠️ ${name} not implemented`);
+    for (let str of yes) {
+        if (!regexp.test(str)) console.log(`❌ Fail: '${str}' should match (${name})`);
+    }
+    for (let str of no) {
+        if (regexp.test(str)) console.log(`❌ Fail: '${str}' should not match (${name})`);
+    }
+    console.log(`✅ Tests done for: ${name}\n`);
+}
+
+testRegexpNum(
+    "JavaScript-style numbers",
+    regexp,
+    [
+        "1",       // simple integer
+        "-1",      // negative integer
+        "+15",     // positive integer with plus sign
+        "1.55",    // decimal number
+        ".5",      // starts with dot
+        "5.",      // ends with dot
+        "1e10",    // exponent notation
+        "1E-10",   // exponent with negative sign
+        "5e+3",    // exponent with positive sign
+        "-3.5e+2", // full mixed example
+        "0",       // zero
+    ],
+    [
+        "abc",     // letters
+        ".",       // lone dot
+        "1a",      // letters after number
+        "+-5",     // two signs
+        "1e",      // exponent without digits
+        "1e1.5",   // invalid exponent format
+        "e5",      // missing base number
+        "--5",     // invalid sign
+        " 1",      // leading space
+        "1 ",      // trailing space
+    ]
+);
